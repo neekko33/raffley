@@ -1,11 +1,10 @@
 import Config
 
+# use a secret file for database (config/dev.secret.exs)
+import_config("dev.secret.exs")
+
 # Configure your database
 config :raffley, Raffley.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "raffley_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
