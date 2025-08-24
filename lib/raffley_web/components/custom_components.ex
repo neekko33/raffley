@@ -22,7 +22,7 @@ defmodule RaffleyWeb.CustomComponents do
 
   def raffle_card(assigns) do
     ~H"""
-    <div class="border border-gray-200 rounded-lg p-4 shadow-md cursor-pointer">
+    <div class="border border-gray-200 rounded-lg p-4 shadow-md cursor-pointer w-[300px]">
       <div class="flex justify-center">
         <img
           src={@raffle.image_path}
@@ -34,6 +34,24 @@ defmodule RaffleyWeb.CustomComponents do
       <div class="flex justify-between mt-6 text-gray-700 items-center">
         <div class="font-semibold">${@raffle.ticket_price} / Ticket</div>
         <.badge status={@raffle.status} />
+      </div>
+    </div>
+    """
+  end
+
+  slot :inner_block, required: true
+  slot :details
+
+  def banner(assigns) do
+    assigns = assign(assigns, :emoji, ~w(🎉 🚀 🎊 🌟) |> Enum.random())
+
+    ~H"""
+    <div class="w-[50%] bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 border border-blue-300 rounded-lg p-4 mb-6 gap-4">
+      <h1 class="text-white text-2xl font-bold gap-2 flex justify-center items-center">
+        {render_slot(@inner_block)}
+      </h1>
+      <div :for={details <- @details} :if={@details != []} class="text-white text-center mt-4 text-xl">
+        {render_slot(details, @emoji)}
       </div>
     </div>
     """
