@@ -37,3 +37,6 @@ npm-debug.log
 
 # dev database secret file
 /config/dev.secret.exs
+
+# IDE
+.vscode/
